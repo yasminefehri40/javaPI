@@ -1,0 +1,42 @@
+### GUIDE COMPLET DES QUESTIONS - CHATBOT OTEMPS ###
+
+Voici la liste des questions et mots-clés auxquels l'assistant local peut répondre (plus de 20 thèmes) :
+
+--- SALUTATIONS & IDENTITÉ ---
+1. Bonjour / Salut / Hello
+2. Qui es-tu ?
+3. Quel est ton nom ?
+4. Merci !
+5. Au revoir
+
+--- À PROPOS D'OTEMPS ---
+6. C'est quoi OTEMPS ?
+7. Quelle est l'utilité de l'application ?
+8. Aide (pour voir les thèmes disponibles)
+
+--- RÉSERVATIONS & BILLETERIE ---
+9. Comment réserver un événement ?
+10. C'est quoi le Boarding Pass ?
+11. Ticket / Reçu PDF
+12. À quoi sert le QR Code ?
+13. Est-ce que c'est gratuit (Prix) ?
+
+--- ÉVÉNEMENTS ---
+14. Liste des événements disponibles ?
+15. Quels sont les lieux des événements ?
+16. Comment voir les dates et horaires ?
+17. Où se trouve l'adresse ?
+
+--- FONCTIONNALITÉS UTILISATEURS ---
+18. Comment noter ou laisser un avis ?
+19. Système d'étoiles
+20. Mon profil / Mon compte
+21. Comment annuler une réservation ?
+
+--- TECHNIQUE & ADMINISTRATION ---
+22. Comment fonctionne la météo (Annulation auto) ?
+23. Infos sur l'interface Admin / Dashboard
+24. Contact Support / Aide technique
+
+---
+CONSEIL : Vous pouvez cliquer sur les bulles de suggestions en haut du chat pour poser ces questions plus rapidement !
