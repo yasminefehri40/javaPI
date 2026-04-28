@@ -14,7 +14,11 @@ import java.util.List;
 public class MediaService implements IService<Media> {
 
     private Connection getConnection() throws SQLException {
-        return DatabaseConnection.getInstance().getCnx();
+        Connection conn = DatabaseConnection.getInstance().getCnx();
+        if (conn == null || conn.isClosed()) {
+            throw new SQLException("Connexion indisponible pour les medias.");
+        }
+        return conn;
     }
 
     @Override
@@ -129,7 +133,7 @@ public class MediaService implements IService<Media> {
     public int getTotalCount() {
         String sql = "SELECT COUNT(*) as total FROM media";
 
-        try (Connection conn = DatabaseConnection.getInstance().getCnx();
+        try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -146,7 +150,7 @@ public class MediaService implements IService<Media> {
     public int getCountByObjet(int idObjet) {
         String sql = "SELECT COUNT(*) as total FROM media WHERE objet_id = ?";
 
-        try (Connection conn = DatabaseConnection.getInstance().getCnx();
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idObjet);

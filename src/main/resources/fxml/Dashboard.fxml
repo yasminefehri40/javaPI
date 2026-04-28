@@ -55,9 +55,9 @@
                 <VBox spacing="10.0" style="-fx-padding: 0 12 0 12;">
                     <children>
                         <Label text="Systeme" style="-fx-text-fill: #4de3a2; -fx-font-size: 16; -fx-font-family: 'Segoe UI Semibold';" />
-                        <Label fx:id="lblStatus" text="Systeme operationnel" style="-fx-text-fill: #8690ad; -fx-font-size: 14;" />
-                        <Label fx:id="lblDbStatus" text="Connectee" style="-fx-text-fill: #8690ad; -fx-font-size: 14;" />
-                        <Label fx:id="lblLastUpdate" text="--:--" style="-fx-text-fill: #6f7c9d; -fx-font-size: 13;" />
+                        <Label text="Systeme operationnel" style="-fx-text-fill: #8690ad; -fx-font-size: 14;" />
+                        <Label text="Connectee" style="-fx-text-fill: #8690ad; -fx-font-size: 14;" />
+                        <Label text="--:--" style="-fx-text-fill: #6f7c9d; -fx-font-size: 13;" />
                     </children>
                 </VBox>
             </children>
@@ -71,13 +71,23 @@
                     <children>
                         <Label text="Gestion du Dashboard" style="-fx-font-size: 24; -fx-font-family: 'Segoe UI Semibold'; -fx-text-fill: #18243f;" />
                         <Region HBox.hgrow="ALWAYS" />
+                        <VBox alignment="CENTER_LEFT" spacing="2.0">
+                            <children>
+                                <Label fx:id="sessionUserLabel" text="Admin" style="-fx-text-fill: #18243f; -fx-font-size: 14; -fx-font-family: 'Segoe UI Semibold';" />
+                                <Label fx:id="sessionRoleLabel" text="Administrateur" style="-fx-text-fill: #74819d; -fx-font-size: 12;" />
+                            </children>
+                        </VBox>
                         <TextField promptText="Rechercher une section..."
                                    prefWidth="360.0"
                                    style="-fx-background-color: #f3f6fb; -fx-background-radius: 28; -fx-border-radius: 28; -fx-border-color: #dde5f0; -fx-padding: 14 20; -fx-font-size: 15; -fx-text-fill: #4a5878;" />
+                        <Button text="Retour app" onAction="#handleBackToMainApp"
+                                style="-fx-background-color: #2f855a; -fx-text-fill: white; -fx-font-size: 15; -fx-padding: 13 20; -fx-background-radius: 10;" />
                         <Button text="+ Nouvelle categorie" onAction="#handleAddCategorie"
                                 style="-fx-background-color: #20aef3; -fx-text-fill: white; -fx-font-size: 16; -fx-font-family: 'Segoe UI Semibold'; -fx-padding: 14 26; -fx-background-radius: 28;" />
                         <Button text="Rafraichir" onAction="#handleRefresh"
                                 style="-fx-background-color: white; -fx-text-fill: #5b6786; -fx-font-size: 15; -fx-padding: 13 20; -fx-background-radius: 10; -fx-border-color: #d6deea; -fx-border-radius: 10;" />
+                        <Button text="Deconnexion" onAction="#handleLogout"
+                                style="-fx-background-color: #e53e3e; -fx-text-fill: white; -fx-font-size: 15; -fx-padding: 13 20; -fx-background-radius: 10;" />
                     </children>
                 </HBox>
 

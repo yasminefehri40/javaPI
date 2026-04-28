@@ -6,29 +6,26 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/otemps";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "";
+
     private Connection cnx;
     private static DatabaseConnection instance;
 
-    // Paramètres de connexion
-    private final String URL = "jdbc:mysql://127.0.0.1:3307/mon_musee";
-    private final String USERNAME = "root";
-    private final String PASSWORD = "";
-
-    // Constructeur privé pour le Singleton
     private DatabaseConnection() {
         connect();
     }
 
-    // Méthode interne pour (ré)établir la connexion
     private void connect() {
         try {
             if (cnx == null || cnx.isClosed()) {
                 cnx = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-                System.out.println("Connexion établie avec succès !");
+                System.out.println("Base de donnees 'otemps' connectee pour le module patrimoine.");
             }
         } catch (SQLException e) {
             System.err.println("Erreur de connexion : " + e.getMessage());
-            // Ne pas jeter de RuntimeException ici pour éviter de crash l'app au démarrage
+            cnx = null;
         }
     }
 
@@ -39,15 +36,13 @@ public class DatabaseConnection {
         return instance;
     }
 
-    // Vérifie et renvoie la connexion
     public Connection getCnx() {
         try {
-            // Si la connexion a été fermée par une autre classe, on la réouvre
             if (cnx == null || cnx.isClosed()) {
                 connect();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Erreur verification connexion : " + e.getMessage());
         }
         return cnx;
     }

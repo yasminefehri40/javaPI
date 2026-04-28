@@ -14,7 +14,11 @@ import java.util.List;
 public class CategorieService {
 
     private Connection getConnection() throws SQLException {
-        return DatabaseConnection.getInstance().getCnx();
+        Connection conn = DatabaseConnection.getInstance().getCnx();
+        if (conn == null || conn.isClosed()) {
+            throw new SQLException("Connexion indisponible pour les categories.");
+        }
+        return conn;
     }
 
     public int ajouter(Categorie categorie) throws SQLException {

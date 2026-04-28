@@ -16,6 +16,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import otemps.main.OtempsNavigator;
+import otemps.main.SessionBridge;
 import otemps.entites.Objet;
 import otemps.services.AIService;
 import otemps.services.ObjetService;
@@ -68,9 +70,13 @@ public class HomeController {
 
     // ✅ IMAGE PLACEHOLDER - CRÉÉE LOCALEMENT
     private Image placeholderImage;
+    @FXML private Button adminButton;
+    @FXML private Label sessionUserLabel;
+    @FXML private Label sessionRoleLabel;
 
     @FXML
     public void initialize() {
+        updateSessionBanner();
         System.out.println("✅ HomeController initialisé");
 
         // ✅ CRÉER L'IMAGE PLACEHOLDER LOCALEMENT
@@ -93,6 +99,20 @@ public class HomeController {
         }
         if (messageInput != null) {
             messageInput.setOnAction(e -> handleSendMessage());
+        }
+    }
+
+    private void updateSessionBanner() {
+        if (sessionUserLabel != null) {
+            sessionUserLabel.setText(SessionBridge.getDisplayName());
+        }
+        if (sessionRoleLabel != null) {
+            sessionRoleLabel.setText(SessionBridge.getRoleLabel());
+        }
+        if (adminButton != null) {
+            boolean visible = SessionBridge.isAdmin();
+            adminButton.setVisible(visible);
+            adminButton.setManaged(visible);
         }
     }
 
@@ -674,6 +694,9 @@ public class HomeController {
 
 
     @FXML public void handleAdmin() {
+        if (!SessionBridge.isAdmin()) {
+            return;
+        }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Dashboard.fxml"));
 
@@ -697,5 +720,14 @@ public class HomeController {
     @FXML public void handleReset() {
         searchField.clear();
         displayObjets(allObjets);
+    }
+
+    @FXML
+    public void handleBackToMainApp() {
+        Stage stage = (Stage) galerieContainer.getScene().getWindow();
+        String target = SessionBridge.isAdmin()
+                ? "/com/otemps/views/AdminDashboard.fxml"
+                : "/com/otemps/views/UserEventList.fxml";
+        OtempsNavigator.showOnStage(stage, target, SessionBridge.isAdmin() ? 1080 : 1100, SessionBridge.isAdmin() ? 720 : 750);
     }
 }

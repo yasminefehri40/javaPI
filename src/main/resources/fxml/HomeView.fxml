@@ -25,11 +25,18 @@
                 </VBox>
                 <Region HBox.hgrow="ALWAYS" />
                 <HBox spacing="15" alignment="CENTER">
+                    <VBox alignment="CENTER_RIGHT" spacing="2">
+                        <children>
+                            <Label fx:id="sessionUserLabel" text="Utilisateur" style="-fx-text-fill: #d4af37; -fx-font-weight: bold; -fx-font-size: 11;" />
+                            <Label fx:id="sessionRoleLabel" text="Session" style="-fx-text-fill: #999; -fx-font-size: 10;" />
+                        </children>
+                    </VBox>
                     <Button text="Accueil" onAction="#handleGalerie" style="-fx-background-color: transparent; -fx-text-fill: #d4af37; -fx-font-weight: bold; -fx-font-size: 11; -fx-cursor: hand; -fx-underline: true;" />
                     <Separator orientation="VERTICAL" style="-fx-text-fill: #666;" />
+                    <Button text="Retour app" onAction="#handleBackToMainApp" style="-fx-background-color: #2f855a; -fx-text-fill: white; -fx-padding: 8 15; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 5;" />
                     <Button fx:id="toggleFavoritesButton" text="FAVORIS (0)" onAction="#handleToggleFavorites" style="-fx-background-color: #ff6b6b; -fx-text-fill: white; -fx-padding: 8 15; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 5;" />
                     <Button fx:id="toggleChatButton" text="Assistant IA" onAction="#handleToggleChat" style="-fx-background-color: #9370db; -fx-text-fill: white; -fx-padding: 8 15; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 5;" />
-                    <Button text="Admin" onAction="#handleAdmin" style="-fx-background-color: #ff6b6b; -fx-text-fill: white; -fx-padding: 8 15; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 5;" />
+                    <Button fx:id="adminButton" text="Admin" onAction="#handleAdmin" style="-fx-background-color: #ff6b6b; -fx-text-fill: white; -fx-padding: 8 15; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 5;" />
                 </HBox>
             </HBox>
             <VBox spacing="15" style="-fx-padding: 0 20 20 20;">

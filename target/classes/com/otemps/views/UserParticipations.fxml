@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="main-pane" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otemps.controller.UserParticipationsController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="80.0" spacing="20.0" styleClass="top-bar" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleBack" styleClass="nav-button" text="Retour" />
+            <Label styleClass="page-title" text="Mes participations" />
+            <HBox alignment="CENTER_RIGHT" spacing="15.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox alignment="CENTER_LEFT" spacing="3.0">
+                     <children>
+                        <Label fx:id="currentUserLabel" style="-fx-font-weight: bold; -fx-text-fill: #0f172a;" text="Utilisateur" />
+                        <Label fx:id="currentRoleLabel" styleClass="session-hint" text="Participant" />
+                     </children>
+                  </VBox>
+                  <Button mnemonicParsing="false" onAction="#handleLogout" styleClass="nav-button" text="Deconnexion" style="-fx-text-fill: #ef4444;" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="30.0" right="30.0" />
+         </padding>
+      </HBox>
+   </top>
+   <center>
+      <ScrollPane fitToWidth="true" styleClass="content-scroll" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="participationContainer" spacing="15.0">
+               <padding>
+                  <Insets bottom="40.0" left="40.0" right="40.0" top="20.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import otemps.main.OtempsNavigator;
+import otemps.main.SessionBridge;
 import otemps.services.CategorieService;
 import otemps.services.MediaService;
 import otemps.services.ObjetService;
@@ -24,6 +26,8 @@ public class AdminDashboardController {
     @FXML private Label lblDbStatus;
     @FXML private Label lblLastUpdate;
     @FXML private Label lblStatus;
+    @FXML private Label sessionUserLabel;
+    @FXML private Label sessionRoleLabel;
     @FXML private PieChart categoriesPieChart;
 
     private CategorieService categorieService;
@@ -35,6 +39,8 @@ public class AdminDashboardController {
         categorieService = new CategorieService();
         objetService = new ObjetService();
         mediaService = new MediaService();
+        sessionUserLabel.setText(SessionBridge.getDisplayName());
+        sessionRoleLabel.setText(SessionBridge.getRoleLabel());
         loadStatistics();
         updateTimestamp();
     }
@@ -83,7 +89,7 @@ public class AdminDashboardController {
 
     @FXML
     public void handleCategories() {
-        openWindow("/fxml/GestiondesCatégories.fxml", "Gestion des Categories", 1000, 700);
+        openWindow("/fxml/GestiondesCat\u00E9gories.fxml", "Gestion des Categories", 1000, 700);
     }
 
     @FXML
@@ -124,23 +130,21 @@ public class AdminDashboardController {
 
     @FXML
     public void handleHome() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/HomeView.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) lblStatus.getScene().getWindow();
-            stage.getScene().setRoot(root);
-            stage.setWidth(1200);
-            stage.setHeight(800);
-        } catch (IOException e) {
-            System.err.println("Erreur retour accueil: " + e.getMessage());
-            e.printStackTrace();
-        }
+        Stage stage = (Stage) lblStatus.getScene().getWindow();
+        OtempsNavigator.showOnStage(stage, "/fxml/HomeView.fxml", 1200, 800);
+    }
+
+    @FXML
+    public void handleBackToMainApp() {
+        Stage stage = (Stage) lblStatus.getScene().getWindow();
+        OtempsNavigator.showOnStage(stage, "/com/otemps/views/AdminDashboard.fxml", 1080, 720);
     }
 
     @FXML
     public void handleLogout() {
+        SessionBridge.logout();
         Stage stage = (Stage) lblStatus.getScene().getWindow();
-        stage.close();
+        OtempsNavigator.showOnStage(stage, "/com/otemps/views/LoginView.fxml", 1100, 750);
     }
 
     private void openWindow(String fxmlPath, String title, int width, int height) {

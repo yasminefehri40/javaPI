@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="720.0" prefWidth="1080.0" styleClass="login-root" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otemps.controller.LoginController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="80.0" spacing="18.0" styleClass="top-bar" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER_LEFT">
+               <children>
+                  <Label styleClass="logo-text" text="OTEMPS" />
+                  <Label styleClass="logo-subtext" text="Connexion par session" />
+               </children>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label styleClass="session-pill" text="Sans mot de passe" />
+         </children>
+         <padding>
+            <Insets left="30.0" right="30.0" />
+         </padding>
+      </HBox>
+   </top>
+   <center>
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <VBox maxWidth="460.0" spacing="22.0" styleClass="login-card">
+               <children>
+                  <Label styleClass="login-title" text="Choisissez votre profil" />
+                  <Label styleClass="login-subtitle" text="La session garde l'utilisateur actif dans toute l'application. La connexion se fait simplement par selection." wrapText="true" />
+                  <VBox spacing="8.0">
+                     <children>
+                        <Label text="Utilisateur" />
+                        <ComboBox fx:id="userComboBox" maxWidth="1.7976931348623157E308" promptText="Selectionner un utilisateur" />
+                     </children>
+                  </VBox>
+                  <Label fx:id="helperLabel" styleClass="helper-text" text="Choisissez un profil." wrapText="true" />
+                  <Button fx:id="loginButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogin" styleClass="btn-primary" text="Entrer dans l'application" />
+               </children>
+               <padding>
+                  <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
+</BorderPane>
