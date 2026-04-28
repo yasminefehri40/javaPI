@@ -10,8 +10,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Start in User view (Front-office)
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/otemps/views/UserEventList.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/otemps/views/LoginView.fxml"));
         Parent root = loader.load();
 
         Scene scene = new Scene(root, 1100, 750);

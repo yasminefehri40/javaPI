@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.otemps.controller.EventDetailsDialogController"
       prefWidth="750.0" prefHeight="700.0" spacing="0" styleClass="details-dialog-root"
       stylesheets="@../styles/style.css">
-    
-    <!-- Premium Header -->
+
     <VBox styleClass="details-header" spacing="10">
-        <Label fx:id="titleLabel" text="Titre de l'événement" styleClass="details-title"/>
+        <Label fx:id="titleLabel" text="Titre de l'evenement" styleClass="details-title"/>
         <HBox spacing="15" alignment="CENTER_LEFT">
             <Label fx:id="statusLabel" text="ACTIF" styleClass="status-badge, status-active"/>
             <Label fx:id="dateSubtitleLabel" text="Du 20 Mars au 22 Mars 2024" styleClass="details-subtitle"/>
@@ -28,8 +26,6 @@
 
     <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent; -fx-padding: 0;">
         <VBox spacing="30" style="-fx-padding: 30;">
-            
-            <!-- Information Grid -->
             <GridPane hgap="20" vgap="20">
                 <columnConstraints>
                     <ColumnConstraints percentWidth="33"/>
@@ -39,67 +35,57 @@
                 <rowConstraints>
                     <RowConstraints minHeight="80"/>
                 </rowConstraints>
-                
+
                 <VBox styleClass="info-card" GridPane.columnIndex="0">
-                    <Label text="📍 LIEU" styleClass="info-label"/>
+                    <Label text="LIEU" styleClass="info-label"/>
                     <Label fx:id="locationLabel" text="Paris, France" styleClass="info-value" wrapText="true"/>
                 </VBox>
-                
+
                 <VBox styleClass="info-card" GridPane.columnIndex="1">
-                    <Label text="👥 PLACES" styleClass="info-label"/>
+                    <Label text="PLACES" styleClass="info-label"/>
                     <Label fx:id="placesLabel" text="50 places restantes" styleClass="info-value"/>
                 </VBox>
-                
+
                 <VBox styleClass="info-card" GridPane.columnIndex="2">
-                    <Label text="📅 PÉRIODE" styleClass="info-label"/>
+                    <Label text="PERIODE" styleClass="info-label"/>
                     <Label fx:id="periodLabel" text="3 jours" styleClass="info-value"/>
                 </VBox>
             </GridPane>
 
-            <!-- Description -->
             <VBox spacing="10">
-                <Label text="Description de l'événement" styleClass="details-section-title"/>
-                <Label fx:id="descriptionLabel" styleClass="description-text" wrapText="true" 
-                       text="Description détaillée de l'événement..."/>
+                <Label text="Description de l'evenement" styleClass="details-section-title"/>
+                <Label fx:id="descriptionLabel" styleClass="description-text" wrapText="true"
+                       text="Description detaillee de l'evenement..."/>
             </VBox>
 
-            <!-- Participation Section -->
             <VBox spacing="15" styleClass="participation-form">
-                <Label text="🎟️ Réserver votre place" styleClass="details-section-title" style="-fx-text-fill: #78350f; -fx-border-color: #fbbf24;"/>
+                <Label text="Reserver votre place" styleClass="details-section-title" style="-fx-text-fill: #78350f; -fx-border-color: #fbbf24;"/>
                 <HBox spacing="15" alignment="CENTER_LEFT">
                     <VBox spacing="5" HBox.hgrow="ALWAYS">
-                        <Label text="Choisissez votre profil utilisateur" style="-fx-font-weight: bold; -fx-font-size: 13px;"/>
-                        <ComboBox fx:id="userComboBox" promptText="Sélectionner un profil" maxWidth="Infinity" style="-fx-background-radius: 10;"/>
+                        <Label text="Session active" style="-fx-font-weight: bold; -fx-font-size: 13px;"/>
+                        <Label fx:id="sessionUserLabel" styleClass="session-pill" text="Aucune session active" wrapText="true"/>
                     </VBox>
                     <Button fx:id="registerButton" text="S'inscrire (PDF + QR)" styleClass="btn-participate" onAction="#handleRegister"/>
                 </HBox>
             </VBox>
 
-            <!-- Reviews Section -->
             <VBox spacing="20">
-                <Label text="💬 Avis de la communauté" styleClass="details-section-title"/>
-                
-                <!-- Add Review Box -->
+                <Label text="Avis de la communaute" styleClass="details-section-title"/>
                 <VBox spacing="15" style="-fx-background-color: #f1f5f9; -fx-padding: 20; -fx-background-radius: 15;">
                     <HBox spacing="15" alignment="CENTER_LEFT">
                         <Label text="Votre note :" style="-fx-font-weight: bold;"/>
                         <ComboBox fx:id="ratingComboBox" promptText="Note / 5" prefWidth="120" style="-fx-background-radius: 10;"/>
                     </HBox>
-                    <TextArea fx:id="commentArea" promptText="Partagez votre expérience sur cet événement..." 
+                    <TextArea fx:id="commentArea" promptText="Partagez votre experience sur cet evenement..."
                               prefHeight="80" wrapText="true" style="-fx-background-radius: 10; -fx-padding: 5;"/>
                     <Button fx:id="submitReviewButton" text="Publier mon avis" styleClass="btn-primary" onAction="#handleSubmitReview"/>
                 </VBox>
 
-                <!-- Review List -->
-                <VBox fx:id="reviewsContainer" spacing="15">
-                    <!-- Dynamic review items will be added here -->
-                </VBox>
+                <VBox fx:id="reviewsContainer" spacing="15"/>
             </VBox>
-            
         </VBox>
     </ScrollPane>
 
-    <!-- Footer Actions -->
     <HBox style="-fx-padding: 20; -fx-border-color: #e2e8f0; -fx-border-width: 1 0 0 0;" alignment="CENTER_RIGHT">
         <Button text="Fermer" styleClass="nav-button" onAction="#handleClose" style="-fx-text-fill: #64748b;"/>
     </HBox>

@@ -2,6 +2,10 @@
     -fx-background-color: #f8fafc;
 }
 
+.login-root {
+    -fx-background-color: linear-gradient(to bottom right, #fff8ef, #eff6ff);
+}
+
 .sidebar {
     -fx-background-color: #0f172a;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
@@ -229,4 +233,43 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.02), 5, 0, 0, 2);
 }
 
+.login-card {
+    -fx-background-color: rgba(255, 255, 255, 0.94);
+    -fx-background-radius: 24;
+    -fx-border-color: #dbeafe;
+    -fx-border-radius: 24;
+    -fx-effect: dropshadow(three-pass-box, rgba(15, 23, 42, 0.1), 20, 0, 0, 10);
+}
+
+.login-title {
+    -fx-font-family: "Playfair Display", serif;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0f172a;
+}
+
+.login-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #475569;
+    -fx-line-spacing: 4;
+}
+
+.helper-text {
+    -fx-font-size: 13px;
+    -fx-text-fill: #64748b;
+}
+
+.session-pill {
+    -fx-background-color: #e0f2fe;
+    -fx-text-fill: #075985;
+    -fx-background-radius: 999;
+    -fx-padding: 6 12;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.session-hint {
+    -fx-font-size: 12px;
+    -fx-text-fill: #64748b;
+}
 

@@ -6,11 +6,9 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.ColumnConstraints?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="main-pane" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otemps.controller.AdminEventController">
    <left>
@@ -24,11 +22,11 @@
             </VBox>
             <VBox spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="nav-button, active" text="Événements" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="nav-button, active" text="Evenements" />
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="nav-button" text="Utilisateurs" />
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="nav-button" text="Statistiques" />
                   <Region VBox.vgrow="ALWAYS" />
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSwitchToFront" styleClass="nav-button" text="🌐 Front-office" style="-fx-text-fill: #10b981;" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSwitchToFront" styleClass="nav-button" text="Front-office" style="-fx-text-fill: #10b981;" />
                </children>
                <padding>
                   <Insets left="20.0" right="20.0" top="20.0" />
@@ -42,13 +40,20 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="80.0" spacing="20.0" styleClass="top-bar">
                <children>
-                  <Label styleClass="page-title" text="Gestion des Événements" />
+                  <Label styleClass="page-title" text="Gestion des evenements" />
                   <HBox alignment="CENTER_RIGHT" spacing="15.0" HBox.hgrow="ALWAYS">
                      <children>
-                         <TextField fx:id="searchField" promptText="Rechercher un événement..." styleClass="search-field" />
-                         <Button mnemonicParsing="false" onAction="#handleNewEvent" styleClass="btn-primary" text="+ Nouvel Événement" />
-                         <Button mnemonicParsing="false" onAction="#handleShowStats" styleClass="nav-button" text="📊 Stats" style="-fx-background-color: #f1f5f9; -fx-border-color: #cbd5e1;" />
-                      </children>
+                        <VBox alignment="CENTER_LEFT" spacing="3.0">
+                           <children>
+                              <Label fx:id="adminNameLabel" style="-fx-font-weight: bold; -fx-text-fill: #0f172a;" text="Admin" />
+                              <Label fx:id="adminRoleLabel" styleClass="session-hint" text="Administrateur" />
+                           </children>
+                        </VBox>
+                        <TextField fx:id="searchField" promptText="Rechercher un evenement..." styleClass="search-field" />
+                        <Button mnemonicParsing="false" onAction="#handleNewEvent" styleClass="btn-primary" text="+ Nouvel evenement" />
+                        <Button mnemonicParsing="false" onAction="#handleShowStats" styleClass="nav-button" text="Stats" style="-fx-background-color: #f1f5f9; -fx-border-color: #cbd5e1;" />
+                        <Button mnemonicParsing="false" onAction="#handleLogout" styleClass="nav-button" text="Deconnexion" style="-fx-text-fill: #ef4444;" />
+                     </children>
                   </HBox>
                </children>
                <padding>

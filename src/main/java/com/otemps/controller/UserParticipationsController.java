@@ -3,13 +3,17 @@ package com.otemps.controller;
 import com.otemps.entity.Participation;
 import com.otemps.entity.User;
 import com.otemps.service.ParticipationService;
-import com.otemps.service.UserService;
+import com.otemps.session.UserSession;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -23,35 +27,50 @@ import java.util.ResourceBundle;
 public class UserParticipationsController implements Initializable {
 
     @FXML private VBox participationContainer;
-    @FXML private ComboBox<User> userFilterCombo;
+    @FXML private Label currentUserLabel;
+    @FXML private Label currentRoleLabel;
 
     private ParticipationService participationService;
-    private UserService userService;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        participationService = new ParticipationService();
-        userService = new UserService();
-
-        userFilterCombo.getItems().addAll(userService.findAll());
-        userFilterCombo.setOnAction(e -> loadParticipations());
-        
-        // Load default user (e.g. Alice) if exists
-        if (!userFilterCombo.getItems().isEmpty()) {
-            userFilterCombo.getSelectionModel().select(1); // Select ID 2 (Alice) index 1
-            loadParticipations();
+        if (!ensureSession()) {
+            return;
         }
+
+        participationService = new ParticipationService();
+        updateSessionHeader();
+        loadParticipations();
+    }
+
+    private boolean ensureSession() {
+        if (UserSession.isLoggedIn()) {
+            return true;
+        }
+
+        Platform.runLater(() -> navigateTo("/com/otemps/views/LoginView.fxml"));
+        return false;
+    }
+
+    private void updateSessionHeader() {
+        User currentUser = UserSession.getCurrentUser();
+        if (currentUser == null) {
+            return;
+        }
+
+        currentUserLabel.setText(currentUser.getName());
+        currentRoleLabel.setText(currentUser.isAdmin() ? "Administrateur" : "Participant");
     }
 
     private void loadParticipations() {
         participationContainer.getChildren().clear();
-        User selected = userFilterCombo.getValue();
+        User selected = UserSession.getCurrentUser();
         if (selected == null) return;
 
         List<Participation> list = participationService.findByUser(selected.getId());
         if (list.isEmpty()) {
-            participationContainer.getChildren().add(new Label("Vous n'êtes inscrit à aucun événement."));
+            participationContainer.getChildren().add(new Label("Vous n'etes inscrit a aucun evenement."));
             return;
         }
 
@@ -68,10 +87,10 @@ public class UserParticipationsController implements Initializable {
         VBox info = new VBox(5);
         Label title = new Label(p.getEvent().getTitre());
         title.getStyleClass().add("event-card-title");
-        
-        Label details = new Label("Inscrit le : " + formatter.format(p.getDateInscription()) + " · Lieu : " + p.getEvent().getLieu());
+
+        Label details = new Label("Inscrit le : " + formatter.format(p.getDateInscription()) + " | Lieu : " + p.getEvent().getLieu());
         details.getStyleClass().add("event-card-subtitle");
-        
+
         info.getChildren().addAll(title, details);
         HBox.setHgrow(info, Priority.ALWAYS);
 
@@ -85,7 +104,7 @@ public class UserParticipationsController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Annuler l'inscription");
             alert.setHeaderText("Souhaitez-vous annuler votre participation ?");
-            if (alert.showAndWait().get() == ButtonType.OK) {
+            if (alert.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK) {
                 participationService.delete(p.getId());
                 loadParticipations();
             }
@@ -97,8 +116,18 @@ public class UserParticipationsController implements Initializable {
 
     @FXML
     private void handleBack() {
+        navigateTo("/com/otemps/views/UserEventList.fxml");
+    }
+
+    @FXML
+    private void handleLogout() {
+        UserSession.logout();
+        navigateTo("/com/otemps/views/LoginView.fxml");
+    }
+
+    private void navigateTo(String fxmlPath) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/otemps/views/UserEventList.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
             Stage stage = (Stage) participationContainer.getScene().getWindow();
             stage.getScene().setRoot(root);

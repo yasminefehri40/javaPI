@@ -7,10 +7,10 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="main-pane" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.otemps.controller.UserEventController">
    <top>
@@ -24,12 +24,19 @@
             </VBox>
             <HBox alignment="CENTER_RIGHT" spacing="15.0" HBox.hgrow="ALWAYS">
                <children>
-                  <TextField fx:id="searchField" promptText="Rechercher un événement..." styleClass="search-field" prefWidth="300" />
-                  <Button mnemonicParsing="false" onAction="#handleOpenChatbot" styleClass="btn-primary" text="🤖 Assistant IA" style="-fx-background-color: #10b981;" />
-                  <Button mnemonicParsing="false" onAction="#handleOpenGlobalMap" styleClass="btn-primary" text="🗺️ Carte Globale" style="-fx-background-color: #3b82f6;" />
-                  <Button mnemonicParsing="false" onAction="#handleOpenCalendar" styleClass="btn-primary" text="📅 Calendrier" style="-fx-background-color: #8b5cf6;" />
-                  <Button mnemonicParsing="false" onAction="#handleGoToParticipations" styleClass="btn-primary" text="Mes Participations" style="-fx-background-color: #f59e0b;" />
-                  <Button mnemonicParsing="false" onAction="#handleSwitchToAdmin" styleClass="nav-button" text="Admin Panel" style="-fx-text-fill: #0ea5e9;" />
+                  <TextField fx:id="searchField" promptText="Rechercher un evenement..." styleClass="search-field" prefWidth="300" />
+                  <VBox alignment="CENTER_LEFT" spacing="3.0">
+                     <children>
+                        <Label fx:id="currentUserLabel" style="-fx-font-weight: bold; -fx-text-fill: #0f172a;" text="Utilisateur" />
+                        <Label fx:id="currentRoleLabel" styleClass="session-hint" text="Participant" />
+                     </children>
+                  </VBox>
+                  <Button mnemonicParsing="false" onAction="#handleOpenChatbot" styleClass="btn-primary" text="Assistant IA" style="-fx-background-color: #10b981;" />
+                  <Button mnemonicParsing="false" onAction="#handleOpenGlobalMap" styleClass="btn-primary" text="Carte globale" style="-fx-background-color: #3b82f6;" />
+                  <Button mnemonicParsing="false" onAction="#handleOpenCalendar" styleClass="btn-primary" text="Calendrier" style="-fx-background-color: #8b5cf6;" />
+                  <Button mnemonicParsing="false" onAction="#handleGoToParticipations" styleClass="btn-primary" text="Mes participations" style="-fx-background-color: #f59e0b;" />
+                  <Button fx:id="adminPanelButton" mnemonicParsing="false" onAction="#handleSwitchToAdmin" styleClass="nav-button" text="Admin Panel" style="-fx-text-fill: #0ea5e9;" />
+                  <Button mnemonicParsing="false" onAction="#handleLogout" styleClass="nav-button" text="Deconnexion" style="-fx-text-fill: #ef4444;" />
                </children>
             </HBox>
          </children>
@@ -45,18 +52,16 @@
                <children>
                   <HBox alignment="CENTER_LEFT" spacing="20.0">
                      <children>
-                        <Label styleClass="page-title" text="Événements à Venir" />
+                        <Label styleClass="page-title" text="Evenements a venir" />
                         <Region HBox.hgrow="ALWAYS" />
                         <Label text="Trier par :" />
                         <ComboBox fx:id="sortCombo" prefWidth="180.0" promptText="Nombre de places" />
                      </children>
                   </HBox>
-                  
                   <FlowPane fx:id="eventFlowPane" hgap="25.0" vgap="25.0" />
-                  
                   <HBox alignment="CENTER" spacing="15.0">
                      <children>
-                        <Button fx:id="prevBtn" mnemonicParsing="false" onAction="#handlePrevPage" styleClass="btn-small" text="Précédent" />
+                        <Button fx:id="prevBtn" mnemonicParsing="false" onAction="#handlePrevPage" styleClass="btn-small" text="Precedent" />
                         <Label fx:id="pageInfoLabel" text="Page 1 / 1" />
                         <Button fx:id="nextBtn" mnemonicParsing="false" onAction="#handleNextPage" styleClass="btn-small" text="Suivant" />
                      </children>
