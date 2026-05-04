@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="840.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="otemps.controllers.CategorieFormController"
+            style="-fx-background-color: white;">
+
+    <center>
+        <VBox spacing="22.0" style="-fx-padding: 34 34 28 34; -fx-background-color: white;">
+            <children>
+                <Label fx:id="lblTitre" text="Nouvelle Categorie"
+                       style="-fx-font-size: 28; -fx-font-family: 'Segoe UI Semibold'; -fx-text-fill: #16233d;" />
+
+                <VBox spacing="8.0">
+                    <Label text="Nom" style="-fx-font-size: 16; -fx-text-fill: #33415f;" />
+                    <TextField fx:id="tfNom"
+                               promptText="Ex: Sculpture"
+                               style="-fx-background-color: #f3f6fb; -fx-background-radius: 22; -fx-border-color: #dfe6f0; -fx-border-radius: 22; -fx-padding: 14 18; -fx-font-size: 15;" />
+                </VBox>
+
+                <VBox spacing="8.0">
+                    <Label text="Description" style="-fx-font-size: 16; -fx-text-fill: #33415f;" />
+                    <TextArea fx:id="taDescription"
+                              prefRowCount="7"
+                              promptText="Decrivez la categorie..."
+                              wrapText="true"
+                              style="-fx-background-color: #f3f6fb; -fx-background-radius: 18; -fx-border-color: #dfe6f0; -fx-border-radius: 18; -fx-padding: 16 18; -fx-font-size: 15;" />
+                </VBox>
+
+                <Label fx:id="lblMessage" text="" style="-fx-text-fill: #27ae60; -fx-font-size: 14;" />
+
+                <HBox alignment="CENTER_RIGHT" spacing="14.0">
+                    <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button text="Annuler" onAction="#handleAnnuler"
+                                style="-fx-background-color: #eef2f7; -fx-text-fill: #667289; -fx-font-size: 16; -fx-font-family: 'Segoe UI Semibold'; -fx-padding: 14 26; -fx-background-radius: 22;" />
+                        <Button fx:id="btnEnregistrer" text="Enregistrer" onAction="#handleEnregistrer"
+                                style="-fx-background-color: #21aef3; -fx-text-fill: white; -fx-font-size: 16; -fx-font-family: 'Segoe UI Semibold'; -fx-padding: 14 28; -fx-background-radius: 22;" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
